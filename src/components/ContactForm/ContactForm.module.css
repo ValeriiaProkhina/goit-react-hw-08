@@ -1,0 +1,25 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 252px;
+  border: 2px solid #000;
+  border-radius: 4px;
+  padding: 10px;
+  margin-bottom: 20px;
+  align-items: center;
+}
+.fieldContainer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.field {
+  padding: 5px;
+  outline-color: #3651eb;
+}
+.error {
+  color: #d42020;
+  text-align: start;
+  font-size: smaller;
+}
