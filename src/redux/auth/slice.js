@@ -1,6 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { logIn, logOut, refreshUser, register } from "./authOps";
-import { useSelector } from "react-redux";
+import { logIn, logOut, refreshUser, register } from "./operations";
 
 const authSlice = createSlice({
   name: "auth",
@@ -44,14 +43,3 @@ const authSlice = createSlice({
 });
 
 export default authSlice.reducer;
-
-const selectUser = (state) => state.auth.user;
-const selectIsLoggedIn = (state) => state.auth.isLoggedIn;
-const selectIsRefreshing = (state) => state.auth.isRefreshing;
-
-export const useAuth = () => {
-  const user = useSelector(selectUser);
-  const isLoggedIn = useSelector(selectIsLoggedIn);
-  const isRefreshing = useSelector(selectIsRefreshing);
-  return { user, isLoggedIn, isRefreshing };
-};

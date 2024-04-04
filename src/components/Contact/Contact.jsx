@@ -2,7 +2,7 @@ import { FaPhone } from "react-icons/fa6";
 import { IoPersonSharp } from "react-icons/io5";
 import { useDispatch } from "react-redux";
 import css from "./Contact.module.css";
-import { deleteContact, editContact } from "../../redux/contacts/contactsOps";
+import { deleteContact, editContact } from "../../redux/contacts/operations";
 import { FiEdit3 } from "react-icons/fi";
 import { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
@@ -13,6 +13,17 @@ export default function Contact({ contact: { id, name, number } }) {
   const [editedNumber, setEditedNumber] = useState(number);
 
   const dispatch = useDispatch();
+
+  const handleDelete = () => {
+    dispatch(deleteContact(id))
+      .unwrap()
+      .then(() => {
+        toast.success("Contact deleted.");
+      })
+      .catch((err) => {
+        toast.error(err.message);
+      });
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -83,7 +94,7 @@ export default function Contact({ contact: { id, name, number } }) {
             <button type="button" onClick={() => setIsEditing(true)}>
               <FiEdit3 size="14" />
             </button>
-            <button type="button" onClick={() => dispatch(deleteContact(id))}>
+            <button type="button" onClick={handleDelete}>
               Delete
             </button>
           </div>

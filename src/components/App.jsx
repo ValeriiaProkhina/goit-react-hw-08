@@ -2,9 +2,9 @@ import { lazy, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import Layout from "./Layout";
 import Loader from "./Loader/Loader";
-import { refreshUser } from "../redux/auth/authOps";
+import { refreshUser } from "../redux/auth/operations";
 import { useDispatch } from "react-redux";
-import { useAuth } from "../redux/auth/authSlice";
+import { useAuth } from "../redux/auth/selectors";
 import { RestrictedRoute } from "./RestrictedRoute";
 import { PrivateRoute } from "./PrivateRoute";
 

@@ -1,5 +1,5 @@
 import { Navigate } from "react-router-dom";
-import { useAuth } from "../redux/auth/authSlice";
+import { useAuth } from "../redux/auth/selectors";
 
 export const RestrictedRoute = ({ component: Component, redirectTo = "/" }) => {
   const { isLoggedIn } = useAuth();

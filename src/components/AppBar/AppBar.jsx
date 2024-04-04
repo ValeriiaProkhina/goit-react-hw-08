@@ -1,4 +1,4 @@
-import { useAuth } from "../../redux/auth/authSlice";
+import { useAuth } from "../../redux/auth/selectors";
 import Navigation from "../Navigation/Navigation";
 import UserMenu from "../UserMenu/UserMenu";
 import AuthNav from "../AuthNav/AuthNav";

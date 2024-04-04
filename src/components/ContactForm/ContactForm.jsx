@@ -3,7 +3,8 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import { useDispatch } from "react-redux";
 import * as yup from "yup";
 import css from "./ContactForm.module.css";
-import { addContact } from "../../redux/contacts/contactsOps";
+import { addContact } from "../../redux/contacts/operations";
+import toast, { Toaster } from "react-hot-toast";
 
 const validationSchema = yup.object().shape({
   name: yup
@@ -24,7 +25,11 @@ export default function ContactForm() {
   const nameId = useId();
   const numberId = useId();
   const handleSubmit = (values, actions) => {
-    dispatch(addContact(values));
+    dispatch(addContact(values))
+      .unwrap()
+      .then(() => {
+        toast.success("Added new contact.");
+      });
     actions.resetForm();
   };
 
@@ -62,6 +67,7 @@ export default function ContactForm() {
         </div>
 
         <button type="submit">Add contact</button>
+        <Toaster />
       </Form>
     </Formik>
   );
