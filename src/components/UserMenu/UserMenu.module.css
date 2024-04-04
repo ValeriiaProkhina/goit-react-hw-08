@@ -1,0 +1,9 @@
+.container {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 5px;
+}
+.text {
+  font-weight: 500;
+}

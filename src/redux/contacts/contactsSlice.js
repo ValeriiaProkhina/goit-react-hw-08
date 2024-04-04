@@ -1,7 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { addContact, deleteContact, fetchContacts } from "./contactsOps";
+import {
+  addContact,
+  deleteContact,
+  editContact,
+  fetchContacts,
+} from "./contactsOps";
 import { createSelector } from "@reduxjs/toolkit";
-import { selectNameFilter } from "./filtersSlice";
+import { selectNameFilter } from "../filter/filtersSlice";
+import { useSelector } from "react-redux";
+import { logOut } from "../auth/authOps";
 
 const handlePending = (state) => {
   state.loading = true;
@@ -46,7 +53,22 @@ const slice = createSlice({
           (item) => item.id !== action.payload.id
         );
       })
-      .addCase(deleteContact.rejected, handleRejected);
+      .addCase(deleteContact.rejected, handleRejected)
+      .addCase(logOut.fulfilled, (state) => {
+        state.items = [];
+        state.loading = false;
+        state.error = null;
+      })
+      .addCase(editContact.pending, handlePending)
+      .addCase(editContact.fulfilled, (state, action) => {
+        const itemIndex = state.items.findIndex(
+          (item) => item.id === action.payload.id
+        );
+        state.items[itemIndex] = action.payload;
+        state.loading = false;
+        state.error = null;
+      })
+      .addCase(editContact.rejected, handleRejected);
   },
 });
 
@@ -61,3 +83,10 @@ export const selectFilteredContacts = createSelector(
     );
   }
 );
+
+export const useContacts = () => {
+  const { items } = useSelector(selectContacts);
+  const { loading } = useSelector(selectContacts);
+  const { error } = useSelector(selectContacts);
+  return items, loading, error;
+};

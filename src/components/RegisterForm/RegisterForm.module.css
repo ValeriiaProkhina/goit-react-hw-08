@@ -1,0 +1,14 @@
+.form {
+  width: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.button {
+  margin-top: 10px;
+}
+.error {
+  color: #d42020;
+  text-align: start;
+  font-size: smaller;
+}
